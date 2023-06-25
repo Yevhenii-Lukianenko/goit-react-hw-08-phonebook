@@ -1,13 +1,21 @@
-import { useSelector } from 'react-redux';
-import { Navigate } from 'react-router-dom';
+// import { useEffect } from 'react';
+// import { useSelector } from 'react-redux';
+// import { useNavigate } from 'react-router-dom';
 
-import { selectIsLogin } from 'redux/auth/selectors';
+// import { selectIsLogin } from 'redux/auth/selectors';
 import { LoginForm } from 'components/Auth/LoginForm/LoginForm';
 
 const Login = () => {
-  const isLogin = useSelector(selectIsLogin);
+  // const navigate = useNavigate();
+  // const isLogin = useSelector(selectIsLogin);
 
-  return <>{isLogin ? <Navigate to="/" /> : <LoginForm />}</>;
+  // useEffect(() => {
+  //   if (isLogin) {
+  //     navigate('/');
+  //   }
+  // });
+
+  return <LoginForm />;
 };
 
 export default Login;

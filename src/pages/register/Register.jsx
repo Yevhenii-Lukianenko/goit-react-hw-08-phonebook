@@ -1,13 +1,21 @@
-import { useSelector } from 'react-redux';
-import { Navigate } from 'react-router-dom';
+// import { useEffect } from 'react';
+// import { useSelector } from 'react-redux';
+// import { useNavigate } from 'react-router-dom';
 
-import { selectIsLogin } from 'redux/auth/selectors';
+// import { selectIsLogin } from 'redux/auth/selectors';
 import { RegisterForm } from 'components/Auth/RegisterForm/RegisterForm';
 
 const Register = () => {
-  const isLogin = useSelector(selectIsLogin);
+  // const navigate = useNavigate();
+  // const isLogin = useSelector(selectIsLogin);
 
-  return <>{isLogin ? <Navigate to="/" /> : <RegisterForm />}</>;
+  // useEffect(() => {
+  //   if (isLogin) {
+  //     navigate('/');
+  //   }
+  // });
+
+  return <RegisterForm />;
 };
 
 export default Register;
