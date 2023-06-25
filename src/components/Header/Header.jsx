@@ -1,31 +1,18 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { logout } from 'redux/auth/operations';
-import {
-  selectAuth,
-  selectIsLogin,
-  selectIsLoading,
-} from 'redux/auth/selectors';
+import { useSelector } from 'react-redux';
+import { selectIsLogin } from 'redux/auth/selectors';
 
 import {
   HeaderContainer,
   LogoLink,
-  UserName,
-  Button,
   AuthNavigation,
   AuthLink,
 } from './Header.styled';
-import { LoaderButton } from 'components/Loaders/LoaderButton';
-import { TbAddressBook, TbUserCircle, TbDoorExit } from 'react-icons/tb';
+
+import { TbAddressBook } from 'react-icons/tb';
+import { UserMenu } from 'components/UserMenu/UserMenu';
 
 export const Header = () => {
-  const user = useSelector(selectAuth);
   const isLogin = useSelector(selectIsLogin);
-  const isLoading = useSelector(selectIsLoading);
-  const dispatch = useDispatch();
-
-  const handleLogout = () => {
-    dispatch(logout());
-  };
 
   return (
     <HeaderContainer>
@@ -33,30 +20,9 @@ export const Header = () => {
         <TbAddressBook style={{ width: '1.5em', height: '1.5em' }} />
         Phonebook
       </LogoLink>
-      {user && user.name && (
-        <UserName>
-          <TbUserCircle style={{ width: '1.5em', height: '1.5em' }} />
-          {`${user.name}`}
-        </UserName>
-      )}
+
       {isLogin ? (
-        <Button type="button" onClick={handleLogout}>
-          {isLoading ? (
-            <LoaderButton />
-          ) : (
-            <span
-              style={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                gap: '4px',
-              }}
-            >
-              <TbDoorExit />
-              Logout
-            </span>
-          )}
-        </Button>
+        <UserMenu />
       ) : (
         <AuthNavigation>
           <AuthLink to="/login">Log in</AuthLink>
