@@ -1,7 +1,11 @@
-/* @import '../node_modules/modern-normalize/modern-normalize.css'; */
-
+@import '../node_modules/modern-normalize/modern-normalize.css';
+@import url('https://fonts.googleapis.com/css2?family=Ysabeau+Infant:ital,wght@1,400;1,700&display=swap');
 body {
-  margin: 60px 30px;
+  color: black;
+  background-color: #f8f7f5;
+  height: 100vh;
+  /* margin: 0; */
+  font-family: 'Ysabeau Infant', sans-serif;
 }
 
 h1,
@@ -12,4 +16,15 @@ h5,
 h6,
 p {
   margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
 }

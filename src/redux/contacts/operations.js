@@ -1,7 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
-axios.defaults.baseURL = 'https://647b0e76d2e5b6101db0c9e7.mockapi.io';
+axios.defaults.baseURL = 'https://connections-api.herokuapp.com/';
 
 export const fetchContacts = createAsyncThunk(
   'contacts/fetchAll',
@@ -17,9 +18,10 @@ export const fetchContacts = createAsyncThunk(
 
 export const addContact = createAsyncThunk(
   'contacts/addContact',
-  async (text, thunkAPI) => {
+  async (contact, thunkAPI) => {
     try {
-      const response = await axios.post('/contacts', text);
+      const response = await axios.post('/contacts', contact);
+      Notify.success(`Contact ${response.data.name} was added`);
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
@@ -32,6 +34,20 @@ export const deleteContact = createAsyncThunk(
   async (contactId, thunkAPI) => {
     try {
       const response = await axios.delete(`/contacts/${contactId}`);
+      Notify.success(`Contact ${response.data.name} was deleted`);
+      return response.data;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);
+
+export const editContact = createAsyncThunk(
+  'contacts/editContact',
+  async (contact, thunkAPI) => {
+    try {
+      const response = await axios.patch(`/contacts/${contact.id}`, contact);
+      Notify.success(`Contact ${response.data.name} was edited`);
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);

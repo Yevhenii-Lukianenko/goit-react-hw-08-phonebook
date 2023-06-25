@@ -1,32 +1,34 @@
-import { ContactForm } from './ContactForm/ContactForm';
-import { ContactsList } from './ContactsList/ContactsList';
-import { Filter } from './Filter/Filter';
-import { useDispatch, useSelector } from 'react-redux';
+import { lazy } from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import { currentUser } from 'redux/auth/operations';
+import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import { fetchContacts } from 'redux/operations';
-import { selectError, selectIsLoading } from 'redux/selectors';
-import { Notify } from 'notiflix/build/notiflix-notify-aio';
+
+import SharedLayout from './SharedLayout/SharedLayout ';
+import { Container } from './Container/Container';
+
+const Contacts = lazy(() => import('../pages/contacts/Contacts'));
+const Login = lazy(() => import('../pages/login/Login'));
+const Register = lazy(() => import('../pages/register/Register'));
 
 export const App = () => {
   const dispatch = useDispatch();
-  const isLoading = useSelector(selectIsLoading);
-  const error = useSelector(selectError);
-
-  if (error) {
-    Notify.failure(error);
-  }
 
   useEffect(() => {
-    dispatch(fetchContacts());
+    dispatch(currentUser());
   }, [dispatch]);
 
   return (
-    <div>
-      <h1>Phonebook</h1>
-      <ContactForm />
-      <h2>Contacts</h2>
-      <Filter />
-      {isLoading ? <h1> Loading...</h1> : <ContactsList />}
-    </div>
+    <Container>
+      <Routes>
+        <Route path="/" element={<SharedLayout />}>
+          <Route index element={<Contacts />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+        </Route>
+
+        <Route path="*" element={<Navigate to="/" />} />
+      </Routes>
+    </Container>
   );
 };
