@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 
 import { fetchContacts } from 'redux/contacts/operations';
 import { selectIsLoading } from 'redux/contacts/selectors';
@@ -15,14 +15,15 @@ const Contacts = () => {
   const dispatch = useDispatch();
   const isLoading = useSelector(selectIsLoading);
   const isLogin = useSelector(selectIsLogin);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   useEffect(() => {
-    if (!isLogin) {
-      return navigate('/login');
-    }
+    // if (!isLogin) {
+    //   return navigate('/login');
+    // }
     dispatch(fetchContacts());
-  }, [dispatch, isLogin, navigate]);
+    // }, [dispatch, isLogin, navigate]);
+  }, [dispatch, isLogin]);
 
   return (
     <ContactsContainer>
