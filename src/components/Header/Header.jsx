@@ -16,7 +16,7 @@ export const Header = () => {
 
   return (
     <HeaderContainer>
-      <LogoLink href="/">
+      <LogoLink>
         <TbAddressBook style={{ width: '1.5em', height: '1.5em' }} />
         Phonebook
       </LogoLink>
