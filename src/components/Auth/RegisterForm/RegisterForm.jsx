@@ -28,13 +28,10 @@ export const RegisterForm = () => {
     e.preventDefault();
     try {
       await dispatch(register(state));
-      reset();
     } catch (error) {
       Notify.failure(`Error! ${error}`);
     }
   };
-
-  const reset = () => setState({ name: '', email: '', password: '' });
 
   return (
     <FormContainer>

@@ -27,13 +27,10 @@ export const LoginForm = () => {
     e.preventDefault();
     try {
       await dispatch(login(state));
-      reset();
     } catch (error) {
       Notify.failure(`Error! ${error}`);
     }
   };
-
-  const reset = () => setState({ email: '', password: '' });
 
   return (
     <FormContainer>
